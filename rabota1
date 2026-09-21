@@ -1,0 +1,70 @@
+using System;
+
+public class Car
+{
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    private int _speed;
+    public int Speed 
+    { 
+        get => _speed; 
+        set 
+        {
+            if (value < 0)
+            {
+                Console.WriteLine("Ошибка: скорость не может быть отрицательной. Значение установлено в 0.");
+                _speed = 0;
+            }
+            else
+            {
+                _speed = value;
+            }
+        } 
+    }
+
+    public Car(string brand, string model, int year, int initialSpeed)
+    {
+        Brand = brand;
+        Model = model;
+        Year = year;
+        Speed = initialSpeed;
+    }
+    public void Accelerate(int value)
+    {
+        Speed += value;
+    }
+
+    public override string ToString()
+    {
+        return $"Марка: {Brand}\nМодель: {Model}\nГод: {Year}\nСкорость: {Speed} км/ч";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Car car1 = new Car("BMW", "M5", 2022, 120);
+        Car car2 = new Car("Lada", "Vesta", 2023, 80);
+
+        Console.WriteLine("=== Исходные данные ===");
+        Console.WriteLine("Автомобиль 1:");
+        Console.WriteLine(car1);
+        Console.WriteLine();
+        
+        Console.WriteLine("Автомобиль 2:");
+        Console.WriteLine(car2);
+        Console.WriteLine(new string('-', 30));
+
+        car1.Speed = 150;
+
+        // car1.Speed = -50; 
+
+        car1.Accelerate(30); // Скорость станет 180
+
+        Console.WriteLine("\n=== После изменения скорости ===");
+        Console.WriteLine("Автомобиль 1:");
+        Console.WriteLine(car1);
+    }
+}
