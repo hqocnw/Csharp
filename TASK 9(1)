@@ -1,0 +1,38 @@
+using System;
+
+class Program
+{
+    static void ExchangeValues(int first, int second)
+    {
+        int buffer = first;
+        first = second;
+        second = buffer;
+
+        Console.WriteLine("ExchangeValues -> first: {0}, second: {1}", first, second);
+    }
+
+    static void ExchangeValuesByRef(ref int first, ref int second)
+    {
+        int buffer = first;
+        first = second;
+        second = buffer;
+
+        Console.WriteLine("ExchangeValuesByRef -> first: {0}, second: {1}", first, second);
+    }
+
+    static void Main()
+    {
+        int left = 5;
+        int right = 10;
+
+        Console.WriteLine("Начальные значения: left = {0}, right = {1}", left, right);
+        Console.WriteLine();
+
+        ExchangeValues(left, right);
+        Console.WriteLine("После ExchangeValues: left = {0}, right = {1}", left, right);
+        Console.WriteLine();
+
+        ExchangeValuesByRef(ref left, ref right);
+        Console.WriteLine("После ExchangeValuesByRef: left = {0}, right = {1}", left, right);
+    }
+}
