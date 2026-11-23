@@ -1,0 +1,66 @@
+using System;
+
+class Person
+{
+    public string Name;
+    public int Age;
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+class Program
+{
+    static void ClearPersonNoRef(Person? person)
+    {
+        person = null;
+        Console.WriteLine("Внутри ClearPersonNoRef: person установлен в null.");
+    }
+
+    static void ClearPersonByRef(ref Person? person)
+    {
+        person = null;
+        Console.WriteLine("Внутри ClearPersonByRef: person установлен в null.");
+    }
+
+    static void RenamePerson(Person person)
+    {
+        person.Name = "Петр";
+    }
+
+    static void Main()
+    {
+        Person firstPerson = new Person("Алексей", 30);
+        Person? secondPerson = new Person("Мария", 25);
+
+        Console.WriteLine("Начальные данные:");
+        Console.WriteLine($"Name: {firstPerson.Name}, Age: {firstPerson.Age}");
+        Console.WriteLine($"Name: {secondPerson.Name}, Age: {secondPerson.Age}");
+
+        Console.WriteLine("\n--- Попытка сброса БЕЗ ref ---");
+
+        ClearPersonNoRef(firstPerson);
+
+        if (firstPerson != null)
+        {
+            Console.WriteLine($"firstPerson не null: Name: {firstPerson.Name}, Age: {firstPerson.Age}");
+        }
+
+        Console.WriteLine("\n--- Попытка сброса С ref ---");
+
+        ClearPersonByRef(ref secondPerson);
+
+        if (secondPerson == null)
+        {
+            Console.WriteLine("secondPerson is null : Name: null, Age: null;");
+        }
+
+        Console.WriteLine("\n--- Изменение состояния объекта (без ref) ---");
+
+        RenamePerson(firstPerson);
+        Console.WriteLine($"Name: {firstPerson.Name}, Age: {firstPerson.Age}");
+    }
+}
